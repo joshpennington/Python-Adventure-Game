@@ -4,9 +4,20 @@ class Game(object):
 		
 		main_room = MainRoom()
 		living_room = LivingRoom()
+		bed_room = BedRoom()
+		dining_room = DiningRoom()
 
-		main_room.set_north(living_room)
-		living_room.set_south(main_room)
+		main_room.set_east(living_room)
+		main_room.set_south(bed_room)
+
+		living_room.set_west(main_room)
+		living_room.set_south(dining_room)
+
+		bed_room.set_north(main_room)
+		bed_room.set_east(dining_room)
+
+		dining_room.set_north(living_room)
+		dining_room.set_west(bed_room)
 
 		current_room = main_room
 
@@ -24,10 +35,10 @@ class Game(object):
 				print "Enter S to go South to the %s" % current_room.south.title
 			
 			if current_room.east != None:
-				print "Enter E to go East"
+				print "Enter E to go East to the %s" % current_room.east.title
 
 			if current_room.west != None:
-				print "Enter W to go West"
+				print "Enter W to go West to the %s" % current_room.west.title
 
 			command = raw_input('> ')
 
@@ -84,3 +95,13 @@ class LivingRoom(Room):
 	def __init__(self):
 		self.title = "Living Room"
 		self.description = "A room that appears to have a lot of living in it"
+
+class BedRoom(Room):
+	def __init__(self):
+		self.title = "Bed Room"
+		self.description = "A bed in room. Seems pretty self explanitory"
+
+class DiningRoom(Room):
+	def __init__(self):
+		self.title = "Dining Room"
+		self.description = "There is a table and four chairs"
