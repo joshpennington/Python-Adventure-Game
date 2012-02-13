@@ -1,0 +1,3 @@
+import gameengine
+
+gameengine.Game()
